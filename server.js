@@ -48,23 +48,23 @@ app.get("/scrape", function(req, res) {
       result.image = $(this).find('img').attr('src');
       result.title = $(this).find('.block-link__overlay-link').text();
       result.link = $(this).find('.block-link__overlay-link').attr("href");
-      if (!$(this).find('.block-link__overlay-link').attr("href").includes("http"))
-      {result.link="http://www.bbc.com" + result.link}
-      else {
-        
+      
+      if (result.link && !$(this).find('.block-link__overlay-link').attr("href").includes("http")) {
+        result.link="http://www.bbc.com" + result.link
+      } else {
+        result.link="this link is undefined";
       }
-      // console.log(result.link);
 
       // Create a new Article using the `result` object built from scraping
-      // db.Article.create(result)
-      //   .then(function(dbArticle) {
-      //     // View the added result in the console
-      //     console.log(dbArticle);
-      //   })
-      //   .catch(function(err) {
-      //     // If an error occurred, log it
-      //     console.log(err);
-      //   });
+      db.Article.create(result)
+        .then(function(dbArticle) {
+          // View the added result in the console
+          console.log(dbArticle);
+        })
+        .catch(function(err) {
+          // If an error occurred, log it
+          console.log(err);
+        });
      
       
     });
