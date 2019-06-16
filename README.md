@@ -1,1 +1,2 @@
 # MongoScraper
+When you start the database, you can click the 'start database' button at the top of the page & it will scrape new articles from BBC. The scrape will include the image that matches the article, the title of the article & a link to the article.

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="../app.css" media="screen" title="no title" charset="utf-8">
+  <style>
+    body {
+      background-color: #F2F6D0
+    }
+
+    .jumbotron2 {
+      background-image: url(https://images.pexels.com/photos/518543/pexels-photo-518543.jpeg?auto=format%2Ccompress&cs=tinysrgb&dpr=2&h=750&w=1260);
+      height: 875px;
+      padding: 10px;
+      width: 100%;
+      color: whitesmoke;
+    }
+
+    #wrapper {
+      width: 960px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-top: 5%;
+    }
+
+    #articles {
+      display: inline-block;
+      overflow: auto;
+      width: 60%;
+      height: 700px;
+    }
+
+    #notes {
+      float: right;
+      width: 30%;
+    }
+
+    textarea,
+    input {
+      display: block;
+      width: 100%;
+      background-color: #FCF5C7;
+    }
+
+    input {
+      height: 36px;
+      font-size: 24px;
+    }
+
+    textarea {
+      height: 200px;
+      font-size: 18px;
+    }
+
+    #scrapeArticles {
+      margin-left: 1rem;
+    }
+
+    #viewNotes {
+      margin-left: 1rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card text-center">
+    <div class="card-header">
+      <ul class="nav nav-pills card-header-pills">
+        <li class="nav-item">
+          <a><button type="button" id="viewSaved" class="btn btn-light">View Saved Articles</button></a>
+        </li>
+        <li class="nav-item">
+          <a><button type="button" id="viewNotes" class="btn btn-primary">View Article Notes</button></a>
+        </li>
+        <li class="nav-item">
+          <a><button type="button" id="scrapeArticles" class="btn btn-danger">Scrape New Articles</button></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="jumbotron2">
+    <h1 class="display-4">Mongo Scraper</h1>
+    <p class="lead">Get fancy news from the BBC by scraping the BBC!</p>
+    <br><br>
+  </div>
+  <div class="card text-center">
+    {{{ body }}}
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+</html>
