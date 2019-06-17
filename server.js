@@ -11,7 +11,7 @@ var cheerio = require("cheerio");
 // Require all models
 var db = require("./models");
 
-var PORT = 8080;
+var PORT = process.env.PORT || 8080
 
 // Initialize Express
 var app = express();
@@ -28,7 +28,8 @@ app.use(express.static("public"));
 var exphbs = require("express-handlebars");
 
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/bbcscraper", { useNewUrlParser: true });
+const mongolink = process.env.MONGODB_URI || "mongodb://localhost/bbcscraper"
+mongoose.connect(mongolink, { useNewUrlParser: true });
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
@@ -125,7 +126,7 @@ app.get("/articles/:id", function (req, res) {
 });
 
 // Route for saving/updating an Article's associated Note
-app.post("/articles/:id", function (req, res) {
+app.post("/notes/:id", function (req, res) {
   // Create a new note and pass the req.body to the entry
   db.Note.create(req.body)
     .then(function (dbNote) {
@@ -147,4 +148,34 @@ app.post("/articles/:id", function (req, res) {
 // Start the server
 app.listen(PORT, function () {
   console.log("App running on port " + PORT + "!");
+});
+
+
+
+app.post("/saved-articles/:id", function (req, res){
+db.Article.findOneAndUpdate({ _id: req.params.id }, { saved: true }, { new: true }).then(function (dbArticle) {
+ console.log(dbArticle);
+  res.json(dbArticle);
+ 
+});
+})
+
+app.get("/saved-articles", function (req, res) {
+  // Handlebars requires an object to be sent to the dog handlebars file.
+  // Lucky for us, animals[0] is an object!
+
+  // 1. send the dog object from the animals array to the dog handlebars file.
+  
+  db.Article.find({saved:true})
+    .then(function (dbArticle) {
+      console.log(dbArticle);
+      // If we were able to successfully find Articles, send them back to the client
+      res.render("index", {
+        articles: dbArticle
+      })
+    })
+    .catch(function (err) {
+      // If an error occurred, send it to the client
+      res.render(err);
+    });
 });

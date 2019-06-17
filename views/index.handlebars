@@ -7,8 +7,9 @@
       {{#each articles}}
       <div class="card-body">
         <img src="{{image}}">
-        <h5 class="card-title">{{title}}</h5>
+        <h5 class="card-title" data-id="{{_id}}">{{title}}</h5>
         <a href="{{link}}" class="btn btn-primary">Article Link</a>
+        <button  data-id="{{_id}}" class=" SaveArticles btn btn-primary ">Save Article</button>
       </div>
       {{/each}}
     </div>

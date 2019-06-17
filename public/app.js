@@ -9,13 +9,15 @@ $.getJSON("/articles", function(data) {
 });
 $("#scrapeArticles").on("click", function() {
   event.preventDefault();
-  $.get("/scrape");
-  console.log("did it work");
-});
+
+    $.get("/scrape", function(){window.location="/"});
+ });
+
+ 
 
 
 // Whenever someone clicks a p tag
-$(document).on("click", "p", function() {
+$(document).on("click", "h5", function() {
   // Empty the notes from the note section
   $("#notes").empty();
   // Save the id from the p tag
@@ -56,7 +58,7 @@ $(document).on("click", "#savenote", function() {
   // Run a POST request to change the note, using what's entered in the inputs
   $.ajax({
     method: "POST",
-    url: "/articles/" + thisId,
+    url: "/notes/" + thisId,
     data: {
       // Value taken from title input
       title: $("#titleinput").val(),
@@ -75,4 +77,21 @@ $(document).on("click", "#savenote", function() {
   // Also, remove the values entered in the input and textarea for note entry
   $("#titleinput").val("");
   $("#bodyinput").val("");
+});
+
+
+
+
+ $(document).on("click", '.SaveArticles', function(event){
+   event.preventDefault();
+  var articleId = $(this).data('id');
+  console.log("Article ID: " + articleId);
+
+  $.ajax({
+      type: "POST",
+      url: "/saved-articles/" + articleId,
+  }).then(function(response) {
+      console.log(JSON.stringify(response));
+      
+  });
 });
